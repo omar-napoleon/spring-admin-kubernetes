@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: ms-admin-k8s
+  boot:
+    admin:
+      ui:
+        brand: "Admin"
+        title: "Boot Admin"
+  cloud:
+    kubernetes:
+      catalog-services-watch:
+        enabled: true
+        catalogServicesWatchDelay: 5000
+      discovery:
+        service-labels:
+          type: actuator
+
+server:
+  port: 8080
+  servlet:
+    context-path: /ms-admin
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+logging:
+  level:
+    org.springframework.cloud.kubernetes: TRACE
+    de.codecentric.boot.admin.discovery.ApplicationDiscoveryListener: DEBUG

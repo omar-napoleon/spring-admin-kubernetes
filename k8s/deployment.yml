@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-admin-k8s-deployment
+  namespace: spring-admin
+  labels:
+    app: ms-admin-k8s
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ms-admin-k8s
+  template:
+    metadata:
+      name: ms-admin-k8s-deployment
+      labels:
+        app: ms-admin-k8s
+    spec:
+      containers:
+        - name: ms-admin-k8s-deployment
+          image: spring-boot/ms-admin-k8s
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+      serviceAccountName: spring-admin-glue-sa
+      restartPolicy: Always

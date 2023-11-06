@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ms-admin-k8s
+  namespace: spring-admin
+data:
+  application.yml: |-
+    spring:
+      application:
+        name: admin
+      cloud:
+        kubernetes:
+          discovery:
+            enabled: true
+            include-not-ready-addresses: true
+            primary-port-name: management
+            all-namespaces: false
+            namespaces[0]: spring-admin
+            service-labels:
+              spring-boot: true
+          config:
+            enabled: true
+          reload:
+            enabled: true
+
+    server:
+      port: 8080
+      servlet:
+        context-path: /ms-admin
+    management:
+      endpoints:
+        web:
+          exposure:
+            include: "*"
+
+    logging:
+      level:
+        org.springframework.cloud.kubernetes: TRACE
+        de.codecentric.boot.admin.discovery.ApplicationDiscoveryListener: DEBUG

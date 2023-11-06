@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: spring-admin-role-binding
+  namespace: spring-admin
+  labels:
+    app: ms-admin-k8s
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: spring-admin-role
+subjects:
+  - kind: ServiceAccount
+    name: spring-admin-glue-sa
+    namespace: spring-admin
+

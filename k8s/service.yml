@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ms-admin-k8s
+  name: ms-admin-k8s-service
+  namespace: spring-admin
+spec:
+  ports:
+  - nodePort: 30009
+    port: 8080
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: ms-admin-k8s
+  type: NodePort
+
